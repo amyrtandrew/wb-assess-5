@@ -11,9 +11,9 @@ export const query2 = Animal.findOne({
 });
 
 // // Get all animals belonging to the human with primary key 5
-// export const query3 = await Human.getAnimals({
-//     where: {humanId: 5}
-// })
+export const query3 = Animal.findAll({
+    where: {humanId: 5}
+})
 
 // // Get all animals born in a year greater than (but not equal to) 2015.
 export const query4 = Animal.findAll({
@@ -43,7 +43,38 @@ export const query8 = Human.findAll({
 // // Continue reading the instructions before you move on!
 
 // // Print a directory of humans and their animals
-// export async function printHumansAndAnimals() {}
+export async function printHumansAndAnimals() {
+    const people = await Human.findAll({ include: Animal})
+
+    for (const person of people) {
+        const pet = person.Animal
+        if (pet) {
+            console.log(fullName(person), pet.name, pet.species)
+        }
+    }
+    }
+
+// for (const emp of emps) {
+//     const dept = emp.department;
+//     if (dept) {
+//       console.log(emp.name, dept.deptName, dept.phone);
+//     } else {
+//       console.log(emp.name, '-', '-');
+//     }
+
+// async function showPhoneDirectory() {
+//     const emps = await Employee.findAll();
+  
+//     // Can't use await inside a for loop, so use forEach
+//     emps.forEach(async (emp) => {
+//       const dept = await emp.getDepartment();
+//       if (dept) {
+//         console.log(emp.name, dept.deptName, dept.phone);
+//       } else {
+//         console.log(emp.name, '-', '-');
+//       }
+//     });
+//   }
 
 // // Return a Set containing the full names of all humans
 // // with animals of the given species.

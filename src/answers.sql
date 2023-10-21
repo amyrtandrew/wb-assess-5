@@ -6,21 +6,22 @@
 
 3. SELECT SUM(num_cupcakes) FROM orders WHERE processed = 'f';
 
-4. SELECT name, SUM(num_cupcakes) 
-    FROM orders
-    LEFT JOIN cupcakes
-    USING (id)
-    GROUP BY name;
+4. SELECT c.name,SUM(o.num_cupcakes) 
+FROM cupcakes c
+LEFT JOIN orders o
+ON c.id = o.cupcake_id
+GROUP BY c.name
+ORDER BY c.name;
 
-    SELECT dept, COUNT(id) AS num_emps, SUM(salary) AS total_salary
-FROM departments
-  LEFT JOIN employees
-    USING (dept_code)
-GROUP BY dept;
+5. SELECT c.email, SUM(o.num_cupcakes)
+FROM customers c
+LEFT JOIN orders o
+ON c.id = o.customer_id
+GROUP BY c.email
+ORDER BY c.email;
 
-
-        SELECT dept, COUNT(*) AS num_emps, SUM(salary) AS total_salary
-FROM departments
-  LEFT JOIN employees
-    USING (dept_code)
-GROUP BY dept;
+6. SELECT DISTINCT c.fname, c.lname, c.email
+From customers c
+LEFT JOIN orders o 
+ON c.id = o.customer_id
+WHERE cupcake_id = 5 AND processed = 't';

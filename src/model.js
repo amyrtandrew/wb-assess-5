@@ -10,7 +10,7 @@ export class Human extends Model {
   }
 
 
-// getFullName = (human) => console.log(fname, lname)
+getFullName = (human) => console.log(fname, lname)
 }
   
 
